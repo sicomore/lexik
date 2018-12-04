@@ -7,13 +7,15 @@
 
 // any CSS you require will output into a single css file (app.css in this case)
 import 'bootstrap/scss/bootstrap.scss';
-import 'font-awesome/scss/font-awesome.scss';
-import '../css/app.css';
+// import 'font-awesome/scss/font-awesome.scss';
+import '../css/app.scss';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// var $ = require('jquery');
 
+// var $ = require('jquery');
 import $ from 'jquery';
 import 'bootstrap';
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});

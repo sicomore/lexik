@@ -1,20 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Liste des produits{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        {% for message in app.flashes('message') %}
+          <div class="alert alert-danger" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+        {% for info in app.flashes('info') %}
+          <div class="alert alert-info" role="alert">
+            {{ info }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h1>Liste des produits</h1>
+      </div>
+    </div>
+    <div class=" row">
+      <div class="table-responsive">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Description</th>
+              <th scope="col">Prix</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for produit in produits %}
+              <tr>
+                <td scope="col">{{ produit.nom }}</td>
+                <td>{{ produit.description }}</td>
+                <td>{{ produit.prix }}
+                  €</td>
+                <td>
+                  <a href="{{ path('produit_show', {'id': produit.id}) }}">Voir la fiche</a>
+                  {# <a href="{ { path('produit_edit', {'id': produit.id}) }}">edit</a> #}
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="5">Aucun produit n'a été trouvé.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/ProduitController.php'|file_link(0) }}">src/Controller/ProduitController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/produit/index.html.twig'|file_link(0) }}">templates/produit/index.html.twig</a></code></li>
-    </ul>
-</div>
+      </div>
+    </div>
+  </div>
+
+  {# <a href="{ { path('produit_new') }}">Create new</a> #}
 {% endblock %}

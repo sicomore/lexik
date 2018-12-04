@@ -1,3 +1,7 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+   path: /
+   controller: App\Controller\ProduitController::index
+
+# front_office:
+#   ressource: '../src/Controller/'
+#   type: annotation

@@ -19,6 +19,17 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+    /**
+    * Affichage de la liste des produits par ordre croissant
+    * @param
+    */
+    public function findAllOrderNom()
+    {
+      // $produits = $this->findBy(array(), ['nom' => 'ASC']);
+      $produits = $this->findBy([], ['nom' => 'ASC']);
+      return $produits;
+    }
+
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */
