@@ -19,7 +19,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{{ path('produit_index') }}">Liste
+            <a class="nav-link" href="{{ path('produit_index') }}">Liste des produits
               <span class="sr-only">(current)</span></a>
           </li>
         </ul>
@@ -30,19 +30,21 @@
         </ul>
       </div>
       <div class="">
-        {% if app.session.get('panier')is not empty %}
-          <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Voir mon panier" href="{{ path('produit_panier') }}">Votre panier contient
+        <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Voir mon panier" href="{{ path('panier_index') }}">
+          {% if app.session.get('panier')is not empty %}
+            Votre panier contient
             {{ app.session.get('panier')|length }}
-          article{% if app.session.get('panier') | length > 1 %}s{% endif %}
-          </a>
-        {% else %}
-          <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Voir mon panier" href="{{ path('produit_panier') }}">Votre panier est vide</a>
-        {% endif %}
+            article{% if app.session.get('panier') | length > 1 %}s{% endif %}
+          {% else %}
+            Votre panier est vide
+          {% endif %}
+        </a>
       </div>
-
     </nav>
 
-    {% block body %}{% endblock %}
+    <div class="container">
+      {% block body %}{% endblock %}
+    </div>
 
     {% block javascripts %}
       {{ encore_entry_script_tags('app') }}

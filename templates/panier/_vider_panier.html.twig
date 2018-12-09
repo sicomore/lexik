@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('panier_vider') }}" onsubmit="return confirm('Etes-vous certain de vouloir vider votre panier ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('vider_panier') }}">
+    <button class="btn btn-danger">Vider mon panier</button>
+</form>

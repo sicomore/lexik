@@ -1,0 +1,15 @@
+Liste des articles: Products list
+Nom: Name
+Description: Description
+Prix: Price
+Voir la fiche: Show details
+Votre panier contient: Your cart contains
+articles: products
+
+Ajouter au panier: Add to cart
+Retour à la liste: Back to list
+
+# easyadmin actions
+edit_button: edit
+show_button: show
+delete_button: delete

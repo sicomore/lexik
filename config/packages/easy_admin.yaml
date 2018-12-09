@@ -1,6 +1,46 @@
 easy_admin:
-  # site_name: Lexik
-  # formats:
-  #   datetime: 'd/m/Y'
+  site_name: Lexik
+  formats:
+    datetime: 'd/m/Y'
+  # framework:
+  #   translator: {fallbacks: ['fr']}
   entities:
-    - App\Entity\Produit
+    Produit:
+      class: App\Entity\Produit
+      list:
+        actions:
+          - { name: 'show', icon: 'eye' }
+          - { name: 'edit', icon: 'pencil' }
+          - { name: 'delete', icon: 'trash' }
+          - { name: 'search', icon: 'search' }
+        title: 'Liste des produits'
+        fields:
+          - { property: 'id', label: 'Id'}
+          - { property: 'nom', label: 'Nom' }
+          - { property: 'description', label: 'Description' }
+          - { property: 'prix', label: 'Prix' }
+          - { property: 'image', type: 'image', base_path: '%app.path.image_produit%' }
+      form:
+        title: 'Modifier un produit'
+        fields:
+          - { property: 'id', label: 'Id', type_options: {disabled: true}}
+          - { property: 'nom', label: 'Nom' }
+          - { property: 'slug', label: 'Slug', type_options: {disabled: true}}
+          - { property: 'description', label: 'Description' }
+          - { property: 'prix', label: 'Prix' }
+          - { property: 'imageFile', type: 'Vich\UploaderBundle\Form\Type\VichImageType', label: 'Image' }
+
+      show:
+        title: 'Ajouter un nouveau produit'
+        fields:
+          - { property: 'id', label: 'Id' }
+          - { property: 'nom', label: 'Nom' }
+          - { property: 'slug', label: 'Slug' }
+          - { property: 'description', label: 'Description' }
+          - { property: 'prix', label: 'Prix' }
+          - { property: 'imageFile', type: 'Vich\UploaderBundle\Form\Type\VichImageType', label: 'Image' }
+          - { property: 'createdAt', label: 'Créé le', type_options: {disabled: true}}
+          - { property: 'updatedAt', label: 'Mis à jour le', type_options: {disabled: true}}
+          # - { property: 'slug', label: 'Slug', type_options: {disabled: true}}
+          # - { property: 'description', label: 'Description' }
+          # - { property: 'prix', label: 'Prix' }

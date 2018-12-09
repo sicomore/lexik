@@ -1,5 +1,8 @@
 
 ###> symfony/framework-bundle ###
+/src/Form/TestType.php
+/src/DataFixtures/TestFixtures.php
+/templates/test
 /.env.local
 /.env.*.local
 /public/bundles/
