@@ -16,7 +16,6 @@ final class Version20181204205030 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE produit ADD slug VARCHAR(255) NOT NULL');
-        $this->addSql('ALTER TABLE test CHANGE id id INT AUTO_INCREMENT NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -25,6 +24,5 @@ final class Version20181204205030 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE produit DROP slug');
-        $this->addSql('ALTER TABLE test CHANGE id id INT UNSIGNED AUTO_INCREMENT NOT NULL');
     }
 }
