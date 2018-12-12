@@ -3,6 +3,10 @@
 /src/Form/TestType.php
 /src/DataFixtures/TestFixtures.php
 /templates/test
+/Twig
+/kit-starter-symfony-4-docker
+liste-des-produits-export.csv
+templates/easyadmin
 /.env.local
 /.env.*.local
 /public/bundles/

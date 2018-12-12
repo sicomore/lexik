@@ -17,6 +17,8 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('panier', './assets/js/panier.js')
+    .addEntry('home', './assets/js/home.js')
+    .addEntry('show', './assets/js/show.js')
 
     /*
      * FEATURE CONFIG

@@ -8,14 +8,10 @@
 // any CSS you require will output into a single css file (app.css in this case)
 import 'bootstrap/scss/bootstrap.scss';
 // import 'font-awesome/scss/font-awesome.scss';
-import '../scss/app.scss';
+import '../css/show.scss';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 
 // var $ = require('jquery');
 import $ from 'jquery';
 import 'bootstrap';
-
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-});

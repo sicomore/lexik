@@ -17,6 +17,7 @@ $(function () {
       dataType: 'text',
       success: function (e, status) {
         $('#total').html(e + " €");
+        console.log(e);
       },
     });
   });

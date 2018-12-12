@@ -6,11 +6,11 @@ use App\Entity\Produit;
 use App\Entity\Panier;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
-// use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
 * Gestion des produits
 *
-* @Route("/produit")
+* @Route("/produits")
 */
 class ProduitController extends Controller
 {
@@ -43,7 +43,7 @@ class ProduitController extends Controller
   *
   * @Route("/{slug}", name="produit_show", methods="GET|POST")
   */
-  public function show(Request $request, Produit $produit): Response
+  public function show(Request $request, Produit $produit, TranslatorInterface $translator): Response
   {
     $session = $request->getSession();
 
@@ -53,70 +53,45 @@ class ProduitController extends Controller
     }
 
     if (!$produit) {
-      throw $this->createNotFoundException("Ce produit n'existe pas.");
+      $translation = $translator->trans('produit.not.exists');
+      throw $this->createNotFoundException($translation);
     }
 
     $quantite = intval($request->request->get('quantite'));
-    // var_dump($produit);
 
     if (isset($quantite) && !empty($quantite)) {
       if (!is_int($quantite) && $quantite <= 1) {
-        $this->addFlash('message', 'La quantité renseignée "' . $quantite . '" n\'est pas conforme et doit être supérieure à 0.');
+        $translationWarning = $translator->trans('produit.quantite.fausse');
+        $this->addFlash('message', $translationWarning);
 
       } else {
-        // if ($session->has('panier')) {
-        //   $panier = $session->get('panier');
+        if ($session->has('panier')) {
+          $panier = $session->get('panier');
 
+          if (!$panier->getProduit($produit->getId())) {
+            $panier = $panier->addProduit($produit, $quantite);
 
+          } else {
+            $produit = $panier->getProduit($produit->getId());
+            $produit->setQuantite($produit->getQuantite() + $quantite);
+          }
 
-        // if ($panier->has($produit)) {
-        $panier = new Panier();
-        $panier = $panier->addProduit($produit, $quantite);
-        // die(var_dump($panier));
+          $translationMajPanier = $translator->trans('produit.panier.maj');
+
+          $this->addFlash('info', $translationMajPanier);
+
+        } else {
+          $panier = new Panier();
+          $panier = $panier->addProduit($produit, $quantite);
+        }
+
+        $panier->setTotal();
+
         $session->set('panier', $panier);
-
-        // }
-
-        // foreach ($panier as $cle => $articlePanier) {
-        //   if ($produit->getId() === $articlePanier['produitId']) {
-        //     $quantitePanier = $articlePanier['produitQuantite'] + $quantite;
-        //
-        //     $produitMaj[$cle] = [
-        //       'produitId' => $articlePanier['produitId'],
-        //       'produitNom' => $articlePanier['produitNom'],
-        //       'produitSlug' => $articlePanier['produitSlug'],
-        //       'produitDescription' => $articlePanier['produitDescription'],
-        //       'produitPrix' => $articlePanier['produitPrix'],
-        //       'produitQuantite' => $quantitePanier
-        //     ];
-        //     $panier = array_replace($panier, $produitMaj);
-        //   }
-        // }
-        // }
-
-        // if (!isset($produitMaj)) {
-        //   $panier[] = [
-        //     'produitId' => $produit->getId(),
-        //     'produitNom' => $produit->getNom(),
-        //     'produitSlug' => $produit->getSlug(),
-        //     'produitDescription' => $produit->getDescription(),
-        //     'produitPrix' => $produit->getPrix(),
-        //     'produitQuantite' => $quantite
-        //   ];
-        // }
+        $ref = $session->get('referer');
+        $session->set('referer', null);
+        return $this->redirect($ref);
       }
-
-      // var_dump($session->get('panier'));
-      // var_dump($panier);
-      // die();
-
-
-      // $session->set('panier', $panier);
-      $this->addFlash('info', 'Votre panier a bien été mis à jour.');
-
-      $ref = $session->get('referer');
-      $session->set('referer', null);
-      return $this->redirect($ref);
     }
 
     return $this->render('produit/show.html.twig', [
@@ -124,65 +99,4 @@ class ProduitController extends Controller
     ]);
   }
 
-
-  /**
-  *
-  * @Route("/new", name="produit_new", methods="GET|POST")
-  */
-  // public function new(Request $request): Response
-  // {
-  //   $produit = new Produit();
-  //   $form = $this->createForm(ProduitType::class, $produit);
-  //   $form->handleRequest($request);
-  //
-  //   if ($form->isSubmitted() && $form->isValid()) {
-  //     $em = $this->getDoctrine()->getManager();
-  //     $em->persist($produit);
-  //     $em->flush();
-  //
-  //     return $this->redirectToRoute('produit_index');
-  //   }
-  //
-  //   return $this->render('produit/new.html.twig', [
-  //     'produit' => $produit,
-  //     'form' => $form->createView(),
-  //   ]);
-  // }
-
-
-  /**
-  * @Route("/{id}/edit", name="produit_edit", methods="GET|POST")
-  */
-  // public function edit(Request $request, Produit $produit): Response
-  // {
-  //   $form = $this->createForm(ProduitType::class, $produit);
-  //   $form->handleRequest($request);
-  //
-  //   if ($form->isSubmitted() && $form->isValid()) {
-  //     $this->getDoctrine()->getManager()->flush();
-  //
-  //     return $this->redirectToRoute('produit_index', ['id' => $produit->getId()]);
-  //   }
-  //
-  //   return $this->render('produit/edit.html.twig', [
-  //     'produit' => $produit,
-  //     'form' => $form->createView(),
-  //   ]);
-  // }
-
-  /**
-  * Suppression d'un produit
-  *
-  * @Route("/{id}", name="produit_delete", methods="DELETE")
-  */
-  // public function delete(Request $request, Produit $produit): Response
-  // {
-  //   if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
-  //     $em = $this->getDoctrine()->getManager();
-  //     $em->remove($produit);
-  //     $em->flush();
-  //   }
-  //
-  //   return $this->redirectToRoute('produit_index');
-  // }
 }

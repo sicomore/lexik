@@ -2,21 +2,42 @@
 
 namespace App\Tests\Controller;
 
-use App\Controller\PanierController;
+use App\Entity\Produit;
+use App\Entity\Panier;
 use PHPUnit\Framework\TestCase;
 
 class PanierControllerTest extends TestCase
 {
+  /**
+  * Unit test du total du panier
+  */
   public function testTotalPanier()
   {
-    $articlesPanier[0]= [
-      'produitPrix' => 33,
-      'produitQuantite' => 3
-    ];
+    $panier = new Panier();
+    $produit1 = new Produit();
+    $produit2 = new Produit();
+    $produit3 = new Produit();
 
-    $panier = new PanierController();
-    $result = $panier->total($articlesPanier);
+    $produit1
+    ->setNom('Bottes')
+    ->setDescription('Eiusmod landjaeger filet mignon, nisi buffalo ipsum burgdoggen jowl pork belly tenderloin cow mollit dolore in dolor.')
+    ->setPrix(88);
+    $panier->addProduit($produit1, 2);
 
-    $this->assertEquals(99, $result);
+    $produit2
+    ->setNom('Chaussures')
+    ->setDescription('Eiusmod landjaeger filet mignon, nisi buffalo ipsum burgdoggen jowl pork belly tenderloin cow mollit dolore in dolor.')
+    ->setPrix(122);
+    $panier->addProduit($produit2, 1);
+
+    $produit3
+    ->setNom('Chaussettes')
+    ->setDescription('Eiusmod landjaeger filet mignon, nisi buffalo ipsum burgdoggen jowl pork belly tenderloin cow mollit dolore in dolor.')
+    ->setPrix(30);
+    $panier->addProduit($produit3, 3);
+
+    $result = $panier->setTotal()->getTotal();
+
+    $this->assertEquals(388, $result);
   }
 }

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Translation\TranslatorInterface;
 
 
 /**
@@ -23,37 +24,17 @@ class PanierController extends Controller
   */
   public function index(Request $request): Response
   {
-    $total = 0;
-    $panier = null;
+    $panier = new Panier;
 
-    // var_dump( $request->getSession()->get('panier'));
     if (null !== $request->getSession()->get('panier')) {
       $panier = $request->getSession()->get('panier');
-
-      $total = $this->total($panier);
-      // foreach ($panier as $article) {
-      // $total += $article['produitPrix'] * $article['produitQuantite'];
-      // }
     }
 
     return $this->render('panier/index.html.twig', [
-      'panier' => $panier,
-      'total' => $total
+      'produits' => $panier->getProduits(),
+      'nbProduits' => $panier->count(),
+      'total' => $panier->getTotal()
     ]);
-  }
-
-
-  /**
-  */
-  public function total($panier)
-  {
-    $total = 0;
-
-    foreach ($panier as $article) {
-      $total += $article['produitPrix'] * $article['produitQuantite'];
-    }
-
-    return $total;
   }
 
 
@@ -62,12 +43,15 @@ class PanierController extends Controller
   *
   * @Route("/vider", name="panier_vider", methods="DELETE")
   */
-  public function vider(Request $request): Response
+  public function vider(Request $request, TranslatorInterface $translator
+): Response
   {
     if ($this->isCsrfTokenValid('vider_panier', $request->request->get('_token'))) {
-      $request->getSession()->set('panier', []);
+      $request->getSession()->get('panier')->getProduits()->clear();
+      $request->getSession()->get('panier')->setTotal();
     }
-    $this->addFlash('info', 'Votre panier a bien été vidé.');
+    $trans = $translator->trans('panier.vider.message');
+    $this->addFlash('info', $trans);
 
     return $this->redirectToRoute('produit_index');
   }
@@ -82,15 +66,10 @@ class PanierController extends Controller
   {
     $session = $request->getSession();
     $panier = $session->get('panier');
+    $produit = $panier->getProduit((int)$id);
 
     if ($this->isCsrfTokenValid('supprimer_article'.$id, $request->request->get('_token'))) {
-      foreach ($panier as $cle => $article) {
-        if ($id == $article['produitId']) {
-          unset($panier[$cle]);
-          $session->set('panier', $panier);
-          $this->addFlash('info', 'L\'article bien été supprimé de votre panier.');
-        }
-      }
+      $panier->removeProduit($produit);
       return $this->redirectToRoute('panier_index');
     }
 
@@ -110,16 +89,18 @@ class PanierController extends Controller
       $quantite = (int)$request->request->get('quantite');
       $session = $request->getSession();
       $panier = $session->get('panier');
-      foreach ($panier as $cle => $produit) {
-        if ($id == $produit['produitId']) {
-          $panier[$cle]['produitQuantite'] = $quantite;
+      $panierProduits = $session->get('panier')->getProduits();
+
+      foreach ($panierProduits as $cle => $panierProduit) {
+        if ($id === $panierProduit->getId()) {
+          $panier->getProduit($id)->setQuantite($quantite);
           if ($quantite < 1) {
-            unset($panier[$cle]);
+            $panier->removeProduit($panierProduit);
           }
-          $session->set('panier', $panier);
         }
       }
-      $total = $this->total($panier);
+      $total = $panier->setTotal()->getTotal();
+      $session->set('panier', $panier);
       return new Response($total);
     }
   }

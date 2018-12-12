@@ -1,15 +1,33 @@
-Liste des articles: Products list
-Nom: Name
-Description: Description
-Prix: Price
-Voir la fiche: Show details
-Votre panier contient: Your cart contains
-articles: products
+# Traduction interface anglaise
+home.langue: Version française
 
-Ajouter au panier: Add to cart
-Retour à la liste: Back to list
+produit.nom.not_blank: Name
+produit.prix.not_blank: Price
+produit.index.titre: Products list
+produit.show.title: Product
+produit.alt.image: Product image of
+produit.voir.fiche: Show details
+produit.ajouter.panier: Add to cart
+produit.liste.vide: No product was found.
+produit.liste.retour: Back to the list
+produit.panier.maj: My cart is up to date.
+produit.quantite.fausse: The quantity format is not conform and must be greater than 0.
+produit.not.exists: This product does not exists.
 
-# easyadmin actions
-edit_button: edit
-show_button: show
-delete_button: delete
+panier.voir.panier: See my cart
+panier.index.titre: My cart
+panier.index.title: Products cart
+panier.index.quantite: Quantity
+panier.base.contient: My cart contains
+panier.liste.vide: My cart is empty
+panier.supp.alert: Are you sure you want to remove this product ?
+panier.supp.supprimer: Remove
+panier.vider.cart: Are you sure you want to empty your cart ?
+panier.vider.vider: Empty my cart
+panier.vider.message: My cart is now empty.
+
+login.index.title: Login
+login.label.username: Username
+login.label.password: Password
+login.action.entrer: Sign in
+login.erreur.ident: Login failed. Incorrect username and/or password.

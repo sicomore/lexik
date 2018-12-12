@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Panier des produits{% endblock %}
+{% block title %}{{'panier.index.title'|trans}}{% endblock %}
 
 {% block body %}
   {% for message in app.flashes('info') %}
@@ -15,12 +15,11 @@
   {% endfor %}
   <div class="row">
     <div class="col">
-      <h1>Votre panier</h1>
+      <h1>{{'panier.index.titre'|trans}}</h1>
     </div>
-    {% if panier is not empty %}
+    {% if produits is not empty %}
       <div class="col-2 d-flex justify-content-end align-items-center">
         {{ include('panier/_vider_panier.html.twig') }}
-        {# <a class="btn btn-danger" href="{ { path('panier_vider') }}">Vider mon panier</a> #}
       </div>
     {% endif %}
   </div>
@@ -32,31 +31,29 @@
           <thead>
             <tr>
               {# <th scope="col">Id</th> #}
-              <th scope="col">Nom</th>
+              <th scope="col">{{'produit.nom.not_blank'|trans}}</th>
               <th scope="col">Description</th>
-              <th scope="col">Prix</th>
-              <th scope="col">Quantité</th>
+              <th scope="col">{{'produit.prix.not_blank'|trans}}</th>
+              <th scope="col">{{'panier.index.quantite'|trans}}</th>
               <th scope="col">Options</th>
             </tr>
           </thead>
           <tbody>
-            {% for produit in panier %}
+            {% for produit in produits %}
               <tr>
-                {# <input type="hidden" name="idProduit" value="{ { produit.produitId }}"> #}
-                <td class="titre">{{ produit.produitNom }}</td>
-                <td>{{ produit.produitDescription }}</td>
-                <td>{{ produit.produitPrix }}
+                <td class="titre">{{ produit.nom }}</td>
+                <td>{{ produit.description }}</td>
+                <td>{{ produit.prix }}
                   €</td>
-                <td><input id="{{ produit.produitId }}" class="form-control quantite-panier" type="number" name="quantite" value="{{ produit.produitQuantite }}" min="1"></td>
-                {# <td>{ { produit.produitQuantite }}</td> #}
+                <td><input id="{{ produit.id }}" class="form-control quantite-panier" type="number" name="quantite" value="{{ produit.quantite }}" min="1"></td>
                 <td>
-                  <a class="btn btn-success" href="{{ path('produit_show', {'slug': produit.produitSlug}) }}">Voir la fiche</a>
+                  <a class="btn btn-success" href="{{ path('produit_show', {'slug': produit.slug}) }}">{{'produit.voir.fiche'|trans}}</a>
                   {{ include('panier/_supprimer_article_panier.html.twig') }}
                 </td>
               </tr>
             {% else %}
               <tr>
-                <td colspan="6">Vous n'avez aucun produit dans votre panier.</td>
+                <td colspan="6">{{'panier.liste.vide'|trans}}</td>
               </tr>
             {% endfor %}
           </tbody>

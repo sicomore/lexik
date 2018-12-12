@@ -1,0 +1,22 @@
+#produit_show {
+  margin-bottom: 40px;
+
+  table {
+    margin-bottom: 20px;
+
+    table {
+      .form-inline {
+        display: flex;
+
+        .form-control {
+          width: 40px !important;
+          max-width: 40px;
+        }
+      }
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+}

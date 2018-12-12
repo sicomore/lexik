@@ -1,61 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des produits{% endblock %}
+{% block title %}{{'produit.index.titre'|trans}}
+{% endblock %}
 
 {% block body %}
-    <div class="row">
-      <div class="col">
-        {% for message in app.flashes('message') %}
-          <div class="alert alert-danger" role="alert">
-            {{ message }}
-          </div>
-        {% endfor %}
-        {% for info in app.flashes('info') %}
-          <div class="alert alert-info" role="alert">
-            {{ info }}
-          </div>
-        {% endfor %}
-      </div>
+  <div class="row">
+    <div class="col">
+      {% for message in app.flashes('message') %}
+        <div class="alert alert-danger" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+      {% for info in app.flashes('info') %}
+        <div class="alert alert-info" role="alert">
+          {{ info }}
+        </div>
+      {% endfor %}
     </div>
-    <div class="row">
-      <div class="col">
-        <h1>Liste des produits</h1>
-      </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h1>{{'produit.index.titre'|trans}}</h1>
     </div>
+  </div>
 
-    <div class=" row">
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Nom</th>
-              <th scope="col">Description</th>
-              <th scope="col">Prix</th>
-              <th scope="col">Options</th>
+  <div class="row" id="table-home">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">{{'produit.nom.not_blank'|trans}}</th>
+            <th scope="col">Description</th>
+            <th scope="col" id="prix">{{'produit.prix.not_blank'|trans}}</th>
+            <th scope="col">Image</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for produit in produits %}
+            <tr class="ligne_produit">
+              <td scope="col">{{ produit.nom }}</td>
+              <td>{{ produit.description }}</td>
+              <td>{{ produit.prix }}
+                €</td>
+              <td>
+                <img src="{{ vich_uploader_asset(produit, 'imageFile') }}" alt="{{'produit.alt.image'|trans}} {{ produit.nom }}"/>
+              </td>
+              <td>
+                <a class="btn btn-secondary" href="{{ path('produit_show', {'slug': produit.slug}) }}">{{'produit.voir.fiche'|trans}}</a>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {% for produit in produits %}
-              <tr>
-                <td scope="col">{{ produit.nom }}</td>
-                <td>{{ produit.description }}</td>
-                <td>{{ produit.prix }}
-                  €</td>
-                <td>
-                  <a class="btn btn-secondary" href="{{ path('produit_show', {'slug': produit.slug}) }}">Voir la fiche</a>
-                  {# { { include('produit/_delete_form.html.twig') }} #}
-                  {# <a href="{ { path('produit_edit', {'id': produit.id}) }}">edit</a> #}
-                </td>
-              </tr>
-            {% else %}
-              <tr>
-                <td colspan="5">Aucun produit n'a été trouvé.</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+          {% else %}
+            <tr>
+              <td colspan="5">{{'produit.liste.vide'|trans}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+  </div>
 
   {# <a href="{ { path('produit_new') }}">Create new</a> #}
 {% endblock %}

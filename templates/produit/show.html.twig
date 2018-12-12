@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit{% endblock %}
+{% block title %}{{'produit.show.title'|trans}} {{ produit.nom }}{% endblock %}
 
 {% block body %}
   {% for message in app.flashes('message') %}
@@ -14,9 +14,8 @@
       <h1>{{ produit.nom }}</h1>
     </div>
   </div>
-  <div class=" row">
-    <div class="col">
-
+  <div class="row" id="produit_show">
+    <div class="col-md-6">
       <div class="table-responsive">
         <table class="table table-striped">
           <tbody>
@@ -25,24 +24,33 @@
               <td>{{ produit.description }}</td>
             </tr>
             <tr>
-              <th>Prix</th>
+              <th>{{'produit.prix.not_blank'|trans}}</th>
               <td>{{ produit.prix }}
                 €</td>
+            </tr>
+            <tr>
+              <table>
+                <form class="" method="post">
+                <input type="hidden" name="referer" value="app.request.headers.get('referer')">
+                  <div class="form-inline">
+                    <input class="form-control mr-sm-3" type="number" min="1" name="quantite" value="1">
+                    <input class="form-control btn btn-primary" type="submit" name="submit" value="{{'produit.ajouter.panier'|trans}}">
+                  </div>
+                </form>
+              </table>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+    <div class="col-md-6">
+      <img src="{{ vich_uploader_asset(produit, 'imageFile') }}" alt="{{'produit.alt.image'|trans}} {{ produit.nom }}"/>
+    </div>
   </div>
 
   <div class="row">
     <div class="col">
-      <form class="form-inline" method="post">
-        <input type="hidden" name="referer" value="app.request.headers.get('referer')">
-        <input class="form-control mr-sm-3" type="number" min="1" name="quantite" value="1">
-        <input class="form-control" type="submit" name="submit" value="Ajouter au panier">
-      </form>
-      <a href="{{ path('produit_index') }}">Retour à la liste</a>
+      <a href="{{ path('produit_index') }}">{{'produit.liste.retour'|trans}}</a>
 
     </div>
   </div>

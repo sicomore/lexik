@@ -2,11 +2,11 @@ easy_admin:
   site_name: Lexik
   formats:
     datetime: 'd/m/Y'
-  # framework:
-  #   translator: {fallbacks: ['fr']}
   entities:
     Produit:
       class: App\Entity\Produit
+      templates:
+        list: 'easyadmin/list.html.twig'
       list:
         actions:
           - { name: 'show', icon: 'eye' }
@@ -31,16 +31,13 @@ easy_admin:
           - { property: 'imageFile', type: 'Vich\UploaderBundle\Form\Type\VichImageType', label: 'Image' }
 
       show:
-        title: 'Ajouter un nouveau produit'
+        title: 'Visualiser le produit'
         fields:
           - { property: 'id', label: 'Id' }
           - { property: 'nom', label: 'Nom' }
           - { property: 'slug', label: 'Slug' }
           - { property: 'description', label: 'Description' }
           - { property: 'prix', label: 'Prix' }
-          - { property: 'imageFile', type: 'Vich\UploaderBundle\Form\Type\VichImageType', label: 'Image' }
+          - { property: 'image', type: 'image', base_path: '%app.path.image_produit%' }
           - { property: 'createdAt', label: 'Créé le', type_options: {disabled: true}}
           - { property: 'updatedAt', label: 'Mis à jour le', type_options: {disabled: true}}
-          # - { property: 'slug', label: 'Slug', type_options: {disabled: true}}
-          # - { property: 'description', label: 'Description' }
-          # - { property: 'prix', label: 'Prix' }
