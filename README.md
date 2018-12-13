@@ -27,14 +27,16 @@ Install node_modules with yarn in order to use Webpack Encore :
 ```bash
 yarn install
 ```
-
+cd lexik
+composer install
+yarn install
 
 ## Setting up your database
 
-# Schema
+### Schema
 
 Create a database with the name you want.
-In `.env` file at the root of the project, modify the generic name `lexik.db`, in the `DATABASE_URL` parameter, by the name of your database.
+In `.env` file at the root of the project, modify the generic name `lexik.db`, in the `DATABASE_URL` parameter, with the name of your database.
 In your terminal, launch the command :
 ```bash
 php bin/console doctrine:database:create
@@ -44,7 +46,7 @@ or as a shorcut :
 php bin/console d:d:c
 ```
 
-# Produits table
+### Produits table
 
 Update the database with the console command :
 ```bash
@@ -59,14 +61,14 @@ That's it! Your database is fully functional.
 
 ## Run the project
 
-# Launching the server
+### Launching the server
 
 You can use your local server or you can use the internal symfony project server with :
 ```bash
 php bin/console server:run
 ```
 
-# Building the assets
+### Building the assets
 
 You can rather build all your assets in dev mode, temporarily or in a continuous way, or in production mode.
 
@@ -97,7 +99,7 @@ Ok, the list is totally empty.
 So next step is meant to show you how to feed your table with fake data.
 
 
-## Filling up fake data into the database
+## Filling up the database with fake data
 
 Instead of filling up your table manually, your can launch a command that will fill up the table with datas for you.
 
@@ -105,7 +107,7 @@ Open a new terminal session in your project folder and run :
 ```bash
 php bin/console doctrine:fixtures:load
 ```
-or as a shorcut (for the lazy ones ;-) ) :
+or as a shorcut :
 ```bash
 php bin/console d:f:l
 ```
@@ -128,7 +130,7 @@ You should see that 2 tests and 3 assertions were successfully run.
 
 ## Accessing administration interface
 
-In order to access the admin interface, just click on the `administration` button at the top of the page.
+In order to access the admin interface, just click on the `administration` button at the top of the webpage.
 Login : `admin`
 Password : `password`
 
