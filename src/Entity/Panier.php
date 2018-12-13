@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
-* @ORM\Entity(repositoryClass="App\Repository\PanierRepository")
+* Entité non gérée en BDD
 */
 class Panier
 {

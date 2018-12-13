@@ -3,6 +3,7 @@
 /src/Form/TestType.php
 /src/DataFixtures/TestFixtures.php
 /templates/test
+/db
 /Twig
 /kit-starter-symfony-4-docker
 liste-des-produits-export.csv
@@ -10,6 +11,7 @@ templates/easyadmin
 /.env.local
 /.env.*.local
 /public/bundles/
+/public/images/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###

@@ -8,7 +8,7 @@
 // any CSS you require will output into a single css file (app.css in this case)
 import 'bootstrap/scss/bootstrap.scss';
 // import 'font-awesome/scss/font-awesome.scss';
-import '../css/home.scss';
+import '../scss/home.scss';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 

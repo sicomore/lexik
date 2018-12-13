@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
 * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
+* @ORM\Table(name="produits")
 * @Vich\Uploadable
 */
 class Produit
