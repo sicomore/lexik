@@ -6,7 +6,7 @@
 /db
 /Twig
 /kit-starter-symfony-4-docker
-liste-des-produits-export.csv
+*.csv
 bddLocale.php
 templates/easyadmin
 /.env.local
