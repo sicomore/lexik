@@ -138,3 +138,11 @@ Password : `password`
 ## Changing the language of the interface
 
 Just click on the `English version` button at the top to swap languages between French and English
+
+
+## Exporting product list in CSV Format
+You can export the whole list of available products running this console command at the root of your project folder :
+```bash
+php bin/console app:export-csv
+```
+The file will directly downloaded at the root of your project.

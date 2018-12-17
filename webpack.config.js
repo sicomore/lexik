@@ -3,6 +3,8 @@ var Encore = require('@symfony/webpack-encore');
 Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
+    // .setOutputPath('public/build/')
+    // .setPublicPath('/build')
     .autoProvidejQuery()
     .enableSassLoader()
     .enableSingleRuntimeChunk()
