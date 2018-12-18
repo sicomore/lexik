@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Translation\TranslatorInterface;
 
 
@@ -78,13 +77,15 @@ class PanierController extends Controller
 
 
   /**
-  * Modification des quantités dans le panier
+  * Modification des quantités directement dans le panier
   *
   * @Route("/ajax", name="panier_ajax", methods="GET|POST")
   */
   public function ajaxQuantite(Request $request)
   {
-    if (null !== $request->request->get('id') && null !== $request->request->get('quantite') && 0 < $request->request->get('quantite')) {
+    if (null !== $request->request->get('id') &&
+    null !== $request->request->get('quantite') &&
+    0 < $request->request->get('quantite')) {
       $id = (int)$request->request->get('id');
       $quantite = (int)$request->request->get('quantite');
       $session = $request->getSession();

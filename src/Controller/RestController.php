@@ -2,16 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Produit;
-use App\Entity\Panier;
-use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -19,7 +13,7 @@ use FOS\RestBundle\View\View;
 
 
 /**
-* Gestion des produits
+* Controlleur d'APIs
 */
 final class RestController extends FOSRestController
 {
@@ -27,11 +21,13 @@ final class RestController extends FOSRestController
   /**
   * API de la liste des produits
   * @Rest\Get("/produits")
+  *
+  * @param ProduitRepository
   * @return View
   */
   public function getProduits(ProduitRepository $produitRepository):View
   {
-    $produits = $produitRepository->findAllOrderNom();
+    $produits = $produitRepository->findAll();
 
     $jsonFormat = [];
 

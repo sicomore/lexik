@@ -2,7 +2,10 @@
 home.langue: English version
 
 produit.nom.not_blank: Nom
+produit.description.not_blank: Description
 produit.prix.not_blank: Prix
+produit.image.not_blank: Image
+produit.options.not_blank: Options
 produit.index.titre: Liste des produits
 produit.show.title: Produit
 produit.alt.image: Image produit de
@@ -10,7 +13,7 @@ produit.voir.fiche: Voir la fiche
 produit.ajouter.panier: Ajouter au panier
 produit.liste.vide: Aucun produit trouvé
 produit.liste.retour: Retour à la liste
-produit.panier.maj: Mon panier a bien été mis à jour.
+produit.panier.maj: Votre panier a bien été mis à jour.
 produit.quantite.fausse: La quantité renseignée n'est pas conforme et doit être supérieure à 0.
 produit.not.exists: Ce produit n'existe pas.
 
@@ -21,14 +24,22 @@ panier.index.title: Panier des produits
 panier.index.quantite: Quantité
 panier.base.contient: Mon panier contient
 panier.liste.vide: Mon panier est vide
-panier.supp.alert: Etes vous certain de vouloir supprimer cet article ?
+panier.supp.alert: Etes-vous certain(e) de vouloir supprimer cet article ?
 panier.supp.supprimer: Supprimer
-panier.vider.cart: Etes vous certain de vouloir vider votre panier ?
+panier.vider.cart: Etes-vous certain(e) de vouloir vider votre panier ?
 panier.vider.vider: Vider mon panier
-panier.vider.message: Mon panier a bien été vidé.
+panier.vider.message: Votre panier a bien été vidé.
+panier.retour: Poursuivre mes achats
 
 login.index.title: Identification
 login.label.username: Identifiant
 login.label.password: Mot de passe
 login.action.entrer: Connexion
 login.erreur.ident: L'identification a échoué. Identifiiant et/ou mot de passe incorrect.
+
+form.label.delete: Supprimer
+
+code.erreur: Ouuups ! Erreur
+title.erreur: La page que vous recherchez est introuvable.
+contenu.erreur: Veuillez vérifier l'adresse URL envoyée ou
+retour.erreur: retournez sur la page d'accueil

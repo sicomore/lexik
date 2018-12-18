@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1>{{ 'code.erreur'|trans }} {{ status_code }} {{ status_text }}</h1>
+  <h2>{{ 'title.erreur'|trans }}</h2>
+
+  <p>
+    {{ 'contenu.erreur'|trans }} <a href="/{{app.request.locale}}">{{ 'retour.erreur'|trans }}</a>.
+  </p>
+{% endblock %}

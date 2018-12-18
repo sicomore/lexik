@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{'produit.show.title'|trans}} {{ produit.nom }}{% endblock %}
+{% block title %}{{'produit.show.title'|trans}}
+  {{ produit.nom }}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('show') }}
+{% endblock %}
 
 {% block body %}
   {% for message in app.flashes('message') %}
@@ -14,6 +21,7 @@
       <h1>{{ produit.nom }}</h1>
     </div>
   </div>
+
   <div class="row" id="produit_show">
     <div class="col-md-6">
       <div class="table-responsive">
@@ -25,13 +33,12 @@
             </tr>
             <tr>
               <th>{{'produit.prix.not_blank'|trans}}</th>
-              <td>{{ produit.prix }}
-                €</td>
+              <td>{{ produit.prix }} €</td>
             </tr>
             <tr>
               <table>
                 <form class="" method="post">
-                <input type="hidden" name="referer" value="app.request.headers.get('referer')">
+                  <input type="hidden" name="referer" value="app.request.headers.get('referer')">
                   <div class="form-inline">
                     <input class="form-control mr-sm-3" type="number" min="1" name="quantite" value="1">
                     <input class="form-control btn btn-primary" type="submit" name="submit" value="{{'produit.ajouter.panier'|trans}}">
@@ -44,15 +51,22 @@
       </div>
     </div>
     <div class="col-md-6">
-      <img src="{{ vich_uploader_asset(produit, 'imageFile') }}" alt="{{'produit.alt.image'|trans}} {{ produit.nom }}"/>
+      <img src="{{ vich_uploader_asset(produit, 'imageFile') }}" alt="{{'produit.alt.image'|trans}} {{ produit.nom }}" title="{{ produit.nom }}"/>
     </div>
   </div>
 
   <div class="row">
     <div class="col">
-      <a href="{{ path('produit_index') }}">{{'produit.liste.retour'|trans}}</a>
-
+      <a href="{{ path('produit_index') }}">
+        <i class="fas fa-reply"></i>
+        {{'produit.liste.retour'|trans}}
+      </a>
     </div>
   </div>
 
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('show') }}
 {% endblock %}

@@ -3,6 +3,11 @@
 {% block title %}{{'produit.index.titre'|trans}}
 {% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('home') }}
+{% endblock %}
+
 {% block body %}
   <div class="row">
     <div class="col">
@@ -30,10 +35,10 @@
         <thead>
           <tr>
             <th scope="col">{{'produit.nom.not_blank'|trans}}</th>
-            <th scope="col">Description</th>
+            <th scope="col">{{'produit.description.not_blank'|trans}}</th>
             <th scope="col" id="prix">{{'produit.prix.not_blank'|trans}}</th>
-            <th scope="col">Image</th>
-            <th scope="col">Options</th>
+            <th scope="col">{{'produit.image.not_blank'|trans}}</th>
+            <th scope="col">{{'produit.options.not_blank'|trans}}</th>
           </tr>
         </thead>
         <tbody>
@@ -44,10 +49,12 @@
               <td>{{ produit.prix }}
                 €</td>
               <td>
-                <img src="{{ vich_uploader_asset(produit, 'imageFile') }}" alt="{{'produit.alt.image'|trans}} {{ produit.nom }}"/>
+                <img src="{{ vich_uploader_asset(produit, 'imageFile') }}" alt="{{'produit.alt.image'|trans}} {{ produit.nom }}" title="{{ produit.nom }}"/>
               </td>
               <td>
-                <a class="btn btn-secondary" href="{{ path('produit_show', {'slug': produit.slug}) }}">{{'produit.voir.fiche'|trans}}</a>
+                <a class="btn btn-success" href="{{ path('produit_show', {'slug': produit.slug}) }}" data-toggle="tooltip" data-placement="top" title="{{'produit.voir.fiche'|trans}}">
+                  <i class="far fa-eye"></i>
+                </a>
               </td>
             </tr>
           {% else %}
@@ -59,6 +66,9 @@
       </table>
     </div>
   </div>
+{% endblock %}
 
-  {# <a href="{ { path('produit_new') }}">Create new</a> #}
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('home') }}
 {% endblock %}

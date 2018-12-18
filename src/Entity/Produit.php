@@ -9,8 +9,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-
 /**
+* Définit les propriétés de l'entité Produit
+*
 * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
 * @ORM\Table(name="produits")
 * @Vich\Uploadable
@@ -18,6 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Produit
 {
   /**
+  * @var int
+  *
   * @ORM\Id()
   * @ORM\GeneratedValue()
   * @ORM\Column(type="integer")
@@ -25,29 +28,39 @@ class Produit
   private $id;
 
   /**
+  * @var string
+  *
   * @Assert\NotBlank(message="produit.nom.not_blank")
   * @ORM\Column(type="string", length=255, nullable=false)
   */
   private $nom;
 
   /**
+  * @var string
+  *
   * @Gedmo\Slug(fields={"nom"})
   * @ORM\Column(type="string", length=255, nullable=false)
   */
   private $slug;
 
   /**
+  * @var string
+  *
   * @ORM\Column(type="text", nullable=false)
   */
   private $description;
 
   /**
+  * @var int
+  *
   * @Assert\NotBlank(message="produit.prix.not_blank")
   * @ORM\Column(type="integer", nullable=false)
   */
   private $prix;
 
   /**
+  * @var string
+  *
   * @ORM\Column(type="string", length=255, nullable=true)
   */
   private $image;
@@ -60,18 +73,24 @@ class Produit
   private $imageFile;
 
   /**
+  * @var DateTime
+  *
   * @ORM\Column(type="datetime")
   * @Gedmo\Timestampable(on="create")
   */
   private $createdAt;
 
   /**
+  * @var DateTime
+  *
   * @ORM\Column(type="datetime")
   * @Gedmo\Timestampable(on="update")
   */
   private $updatedAt;
 
   /**
+  * @var int
+  *
   * Quantité dans le panier
   */
   private $quantite;

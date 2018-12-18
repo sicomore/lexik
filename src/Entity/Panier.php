@@ -6,12 +6,21 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
+
 /**
-* Entité non gérée en BDD
+* Définit les propriétés de l'entité Panier (non persistée)
+*
 */
 class Panier
 {
+  /**
+  * @var int
+  */
   private $total;
+
+  /**
+  * @var array
+  */
   private $produits;
 
   public function __construct()
@@ -74,15 +83,6 @@ class Panier
   public function count(): Int
   {
     return $this->produits->count();
-  }
-
-
-  public function vider(): self
-  {
-    $this->produits = [];
-    $this->total = 0;
-    $session->set('panier', $this);
-    return $this;
   }
 
 }

@@ -4,13 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Entity\Panier;
-use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -43,7 +41,7 @@ class ProduitController extends Controller
   *
   * @Route("/{slug}", name="produit_show", methods="GET|POST")
   */
-  public function show(Request $request, Produit $produit, TranslatorInterface $translator): Response
+  public function show($slug, Request $request, TranslatorInterface $translator): Response
   {
     $session = $request->getSession();
 
@@ -52,7 +50,9 @@ class ProduitController extends Controller
       $session->set('referer', $referer);
     }
 
-    if (!$produit) {
+    $produit = $this->getDoctrine()->getRepository(Produit::class)->findOneBy(['slug' => $slug]);
+
+    if (null === $produit) {
       $translation = $translator->trans('produit.not.exists');
       throw $this->createNotFoundException($translation);
     }
@@ -77,7 +77,6 @@ class ProduitController extends Controller
           }
 
           $translationMajPanier = $translator->trans('produit.panier.maj');
-
           $this->addFlash('info', $translationMajPanier);
 
         } else {

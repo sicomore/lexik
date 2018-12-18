@@ -3,12 +3,8 @@
 /src/Form/TestType.php
 /src/DataFixtures/TestFixtures.php
 /templates/test
-/db
-/Twig
-/kit-starter-symfony-4-docker
 *.csv
 bddLocale.php
-templates/easyadmin
 /.env.local
 /.env.*.local
 /public/bundles/

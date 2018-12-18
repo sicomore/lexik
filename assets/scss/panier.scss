@@ -1,0 +1,18 @@
+table.panier {
+	tbody {
+		#options {
+			display: flex;
+			justify-content: space-around;
+
+			.btn {
+				width: 45px;
+			}
+		}
+	}
+	
+	tfoot {
+		td {
+			font-weight: 700;
+		}
+	}
+}

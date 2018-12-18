@@ -51,14 +51,13 @@ class ExportCsvCommand extends Command
       $liste = $this->entityManager->getRepository($entityFullName)->findAll();
 
     } catch (\Exception $e) {
-      $io->error('"' . $entity . '" entity does not exist.');
+      $io->error($e->getMessage());
     }
 
     if (isset($liste)) {
-
-
       $listeNormalised = [];
-      $handle = fopen('./liste_' . $entity . '.csv', 'w+');
+      $fileName = lcfirst($entity) . '-list-export.csv';
+      $handle = fopen('./' .$fileName, 'w+');
       $or = new \ReflectionObject($liste[0]);
       $fields = $or->getProperties();
       $thead = [];
@@ -87,7 +86,7 @@ class ExportCsvCommand extends Command
       // $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
       // $results = $serializer->serialize($listeProduits, 'csv');
 
-      $io->success('Your CSV file has been successfully generated and is named '. lcfirst($entity) . '-list-export.csv"');
+      $io->success('Your CSV file has been successfully created and its name is "'. $fileName . '"');
     }
   }
 }

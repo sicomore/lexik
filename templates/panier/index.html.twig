@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{'panier.index.title'|trans}}{% endblock %}
+{% block title %}{{'panier.index.title'|trans}}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('panier') }}
+{% endblock %}
 
 {% block body %}
   {% for message in app.flashes('info') %}
@@ -27,15 +33,14 @@
   <div class=" row">
     <div class="col">
       <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped panier">
           <thead>
             <tr>
-              {# <th scope="col">Id</th> #}
               <th scope="col">{{'produit.nom.not_blank'|trans}}</th>
-              <th scope="col">Description</th>
+              <th scope="col">{{'produit.description.not_blank'|trans}}</th>
               <th scope="col">{{'produit.prix.not_blank'|trans}}</th>
               <th scope="col">{{'panier.index.quantite'|trans}}</th>
-              <th scope="col">Options</th>
+              <th scope="col">{{'produit.options.not_blank'|trans}}</th>
             </tr>
           </thead>
           <tbody>
@@ -46,8 +51,10 @@
                 <td>{{ produit.prix }}
                   €</td>
                 <td><input id="{{ produit.id }}" class="form-control quantite-panier" type="number" name="quantite" value="{{ produit.quantite }}" min="1"></td>
-                <td>
-                  <a class="btn btn-success" href="{{ path('produit_show', {'slug': produit.slug}) }}">{{'produit.voir.fiche'|trans}}</a>
+                <td id="options">
+                  <a class="btn btn-success" href="{{ path('produit_show', {'slug': produit.slug}) }}" data-toggle="tooltip" data-placement="top" title="{{'produit.voir.fiche'|trans}}">
+                    <i class="far fa-eye"></i>
+                  </a>
                   {{ include('panier/_supprimer_article_panier.html.twig') }}
                 </td>
               </tr>
@@ -67,8 +74,15 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col">
+      <a href="{{ path('produit_index') }}"><i class="fas fa-arrow-left"></i>&nbsp;{{'panier.retour'|trans}}</a>
+    </div>
+  </div>
 {% endblock %}
 
 {% block javascripts %}
+  {{ parent() }}
   {{ encore_entry_script_tags('panier') }}
 {% endblock %}

@@ -1,3 +1,5 @@
+import '../scss/panier.scss';
+
 $(function () {
   $('.quantite-panier').change( function() {
     var quantite = $(this).val();
@@ -17,7 +19,6 @@ $(function () {
       dataType: 'text',
       success: function (e, status) {
         $('#total').html(e + " €");
-        console.log(e);
       },
     });
   });

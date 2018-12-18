@@ -2,7 +2,10 @@
 home.langue: Version française
 
 produit.nom.not_blank: Name
+produit.description.not_blank: Description
 produit.prix.not_blank: Price
+produit.image.not_blank: Image
+produit.options.not_blank: Options
 produit.index.titre: Products list
 produit.show.title: Product
 produit.alt.image: Product image of
@@ -10,24 +13,32 @@ produit.voir.fiche: Show details
 produit.ajouter.panier: Add to cart
 produit.liste.vide: No product was found.
 produit.liste.retour: Back to the list
-produit.panier.maj: My cart is up to date.
+produit.panier.maj: Your cart is up to date.
 produit.quantite.fausse: The quantity format is not conform and must be greater than 0.
-produit.not.exists: This product does not exists.
+produit.not.exists: This product does not exist.
 
-panier.voir.panier: See my cart
+panier.voir.panier: Show my cart
 panier.index.titre: My cart
 panier.index.title: Products cart
 panier.index.quantite: Quantity
 panier.base.contient: My cart contains
-panier.liste.vide: My cart is empty
+panier.liste.vide: Your cart is empty
 panier.supp.alert: Are you sure you want to remove this product ?
 panier.supp.supprimer: Remove
 panier.vider.cart: Are you sure you want to empty your cart ?
 panier.vider.vider: Empty my cart
-panier.vider.message: My cart is now empty.
+panier.vider.message: Your cart is now empty.
+panier.retour: Back to list
 
 login.index.title: Login
 login.label.username: Username
 login.label.password: Password
 login.action.entrer: Sign in
 login.erreur.ident: Login failed. Incorrect username and/or password.
+
+form.label.delete: Delete
+
+code.erreur: Oooops ! Error
+title.erreur: The page you are looking for does not exist.
+contenu.erreur: Please checkout if you have any URL misspelling or
+retour.erreur: return to the homepage

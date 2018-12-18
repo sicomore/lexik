@@ -3,14 +3,15 @@
 namespace App\Tests\Controller;
 
 use App\Entity\Produit;
-use App\Entity\Panier;
 use App\Repository\ProduitRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
 
 class ProduitControllerTest extends WebTestCase
 {
   /**
-  * Unit test du total du panier
+  * Test fonctionnel de la liste des produits
   */
   public function testIndex()
   {

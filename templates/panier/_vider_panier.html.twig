@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('panier_vider') }}" onsubmit="return confirm('{{'panier.vider.cart'|trans}}');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('vider_panier') }}">
-    <button class="btn btn-danger">{{'panier.vider.vider'|trans}}</button>
+    <button class="btn btn-danger"><i class="fas fa-trash-alt"></i> {{'panier.vider.vider'|trans}}</button>
 </form>

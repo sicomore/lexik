@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
-*
+* Controleur de sécurité de connexion/déconnexion
 */
 class SecurityController extends AbstractController
 {

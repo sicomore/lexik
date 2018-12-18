@@ -1,6 +1,15 @@
+a:hover {
+	text-decoration: none;
+}
+
 ul.navbar-nav li.nav-item {
   margin-left: 20px !important;
 }
 
-@import "home.scss";
-@import "show.scss";
+.container {
+  padding: 40px 0;
+
+  h1 {
+    margin-bottom: 30px;
+  }
+}
