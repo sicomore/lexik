@@ -1,5 +1,6 @@
 
 ###> symfony/framework-bundle ###
+/.idea
 /src/Form/TestType.php
 /src/DataFixtures/TestFixtures.php
 /templates/test
